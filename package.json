@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev":  "webpack ./src/index.js -o ./dist/ --mode development"
+    "dev":  "webpack ./src/index.js -o ./dist/ --mode development",
+    "build":  "webpack ./src/index.js -o ./dist/ --mode production"
+
     
   },
   "author": "",
