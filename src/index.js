@@ -13,11 +13,13 @@ Vue.component('app', App)
 
 import index from './pages/index.vue'
 import char from './pages/char.vue'
+import chat from './pages/chat.vue'
 
 let router = new VueRouter({
   routes:[
     {path: '/', component: index },
-    {path: '/char/:id',component: char}
+    {path: '/char/:id',component: char},
+    {path: '/chat',component: chat}
   ]
 })
 
