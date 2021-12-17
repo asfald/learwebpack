@@ -1,8 +1,11 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const PurgecssPlugin = require("purgecss-webpack-plugin");
+const { VueLoaderPlugin } = require('vue-loader')
+
 const glob = require("glob");
 const path = require("path");
+
 
 const PATHS = {
   src: path.join(__dirname, "src"),
@@ -20,10 +23,11 @@ module.exports = {
     },
     compress: true,
     port: 9000,
+    open: true,
+
   },
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.css/,
         use: ["style-loader", "css-loader"],
       },
@@ -31,13 +35,15 @@ module.exports = {
         test: /\.scss$/,
         use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
       },
+      { test: /\.vue$/,
+        loader: 'vue-loader'}
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-        template: "./src/index.html",
-       
-      }),
+      template: "./src/index.html",
+
+    }),
     new HtmlWebpackPlugin({
       filename: "about.html",
       template: "./src/about.html",
@@ -45,7 +51,10 @@ module.exports = {
     new MiniCssExtractPlugin(),
 
     new PurgecssPlugin({
-      paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true }),
+      paths: glob.sync(`${PATHS.src}/**/*`, {
+        nodir: true
+      }),
     }),
+    new VueLoaderPlugin()
   ],
 };
